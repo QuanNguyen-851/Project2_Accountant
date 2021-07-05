@@ -15,11 +15,12 @@ class ClassBk extends Migration
     {
         Schema::create('classbk', function (Blueprint $table) {
             $table->id();
-            $table->string('name',50);
+            $table->string('name', 50)->unique();
             $table->unsignedBigInteger('idMajor');
             $table->unsignedBigInteger('idCourse');
             $table->foreign('idMajor')->references('id')->on('major');
             $table->foreign('idCourse')->references('id')->on('course');
+            $table->boolean('disable');
         });
     }
 

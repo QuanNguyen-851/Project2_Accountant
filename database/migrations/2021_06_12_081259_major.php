@@ -15,9 +15,10 @@ class Major extends Migration
     {
         Schema::create('major', function (Blueprint $table) {
             $table->id();
-            $table->string('name',50);
+            $table->string('name', 50);
             $table->integer('fee');
-            $table->string('shortName',5);
+            $table->string('shortName', 5);
+            $table->boolean('disable');
         });
     }
 

@@ -3,29 +3,21 @@
         <nav class="pull-left">
             <ul>
                 <li>
-                    <a href="#">
-                        Home
+                    <a>
+                        Nếu trong quá trình sử dụng xảy ra lỗi hãy liên hệ Nguyễn Tuấn Anh
                     </a>
                 </li>
                 <li>
-                    <a href="#">
-                        Company
+                    <a >
+                        SĐT:0944309344
                     </a>
                 </li>
                 <li>
-                    <a href="#">
-                        Portfolio
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                       Blog
+                    <a >
+                        Email:monkeymouse98@gmail.com
                     </a>
                 </li>
             </ul>
         </nav>
-        <p class="copyright pull-right">
-            &copy; <script>document.write(new Date().getFullYear())</script> <a href="http://www.creative-tim.com">Creative Tim</a>, made with love for a better web
-        </p>
     </div>
 </footer>
