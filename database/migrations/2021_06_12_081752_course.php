@@ -15,9 +15,11 @@ class Course extends Migration
     {
         Schema::create('course', function (Blueprint $table) {
             $table->id();
-            $table->string('name',10);
+            $table->string('name', 10);
             $table->string('year');
             $table->integer('countMustPay');
+            $table->integer('countSubFeeMustPay');
+            $table->boolean('disable');
         });
     }
 

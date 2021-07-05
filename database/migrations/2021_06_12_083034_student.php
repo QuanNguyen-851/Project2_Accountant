@@ -19,13 +19,14 @@ class Student extends Migration
             $table->boolean('gender');
             $table->date('dateBirth');
             $table->string('email')->unique();
-            $table->string('phone',10)->unique();
+            $table->string('phone', 10)->unique();
             $table->text('address');
             $table->integer('fee');
             $table->unsignedBigInteger('idClass');
             $table->foreign('idClass')->references('id')->on('classbk');
             $table->unsignedBigInteger('idStudentShip');
             $table->foreign('idStudentShip')->references('id')->on('scholarship');
+            $table->boolean('disable');
         });
     }
 

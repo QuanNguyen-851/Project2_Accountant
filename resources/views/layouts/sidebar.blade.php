@@ -27,49 +27,24 @@
 
                 <a data-toggle="collapse" href="#collapseExample" class="collapsed">
                     <span>
-                        Tania Andrew
-                        <b class="caret"></b>
+                        {{ Session::get('name') }}
                     </span>
                 </a>
 
-                <div class="collapse" id="collapseExample">
-                    <ul class="nav">
-                        <li>
-                            <a href="#pablo">
-                                <span class="sidebar-mini">MP</span>
-                                <span class="sidebar-normal">My Profile</span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="#pablo">
-                                <span class="sidebar-mini">EP</span>
-                                <span class="sidebar-normal">Edit Profile</span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="#pablo">
-                                <span class="sidebar-mini">S</span>
-                                <span class="sidebar-normal">Settings</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
             </div>
         </div>
 
         <ul class="nav">
             <li class="active">
-                <a href="/">
-                    <i class="pe-7s-graph"></i>
-                    <p>Dashboard</p>
+                <a href="{{route('fee.index')}}">
+                    <i class="pe-7s-note2"></i>
+                    <p>Học phí</p>
                 </a>
             </li>
             <li>
                 <a data-toggle="collapse" href="#componentsExamples">
                     <i class="pe-7s-plugin"></i>
-                    <p>Components
+                    <p>Phụ phí
                        <b class="caret"></b>
                     </p>
                 </a>
@@ -223,7 +198,7 @@
                 </div>
             </li>
             <li>
-                <a href="charts.html">
+                <a href="{{route('fee.index')}}">
                     <i class="pe-7s-graph1"></i>
                     <p>Charts</p>
                 </a>

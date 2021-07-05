@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Receipt extends Migration
+class Subfee extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class Receipt extends Migration
      */
     public function up()
     {
-        Schema::create('fee', function (Blueprint $table) {
+        Schema::create('subfee', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('idStudent');
             $table->foreign('idStudent')->references('id')->on('student');
-            $table->unsignedBigInteger('idMethod');
-            $table->foreign('idMethod')->references('id')->on('payment');
             $table->text('note');
             $table->integer('fee');
             $table->string('accountant');
@@ -37,6 +35,6 @@ class Receipt extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('fee');
+        Schema::dropIfExists('subfee');
     }
 }

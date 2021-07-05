@@ -1,6 +1,10 @@
 <?php
 
 use App\Http\Controllers\ComponentsController;
+use App\Http\Controllers\FeeController;
+use App\Http\Controllers\LoginController;
+use App\Http\Middleware\CheckLoged;
+use App\Http\Middleware\CheckLogin;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,10 +18,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//dashboad
-Route::get('/', function () {
-    return view('dashboard');
+//check login
+Route::middleware([CheckLogin::class])->group(function(){
+    //fee
+    Route::resource('fee',FeeController::class);
+    //logout
+    Route::get('/logout',[LoginController::class, 'logout'])->name('logout');
+});
+//check loged
+Route::middleware([CheckLoged::class])->group(function(){
+    //login
+    Route::get('/',[LoginController::class,'index'])->name('login');
+    Route::post('/process',[LoginController::class, 'process'])->name('process');
 });
 //components
 Route::get('buttons', [ComponentsController::class, 'buttons']);
 Route::get('grid', [ComponentsController::class, 'grid']);
+
