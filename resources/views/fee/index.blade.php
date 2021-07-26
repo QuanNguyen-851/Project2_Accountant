@@ -3,7 +3,9 @@
 <h1>Học phí sinh viên</h1>
 <hr style='width:99%'>
 <div class="toolbar">
+
     <a style="margin-right:100px" onclick="return confirm('Xác nhận ?')" href="{{route('count')}}" class="btn btn-success" type="button">Đợt mới</a>
+
 </div>
 
 <table id="bootstrap-table" class="table">
