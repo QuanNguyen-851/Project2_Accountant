@@ -51,7 +51,7 @@
                     <ul class="dropdown-menu dropdown-with-icons">
                         <li class="divider"></li>
                         <li>
-                            <a href="#">
+                            <a href="{{route('changepass')}}">
                                 <i class="pe-7s-lock"></i> Đổi mật khẩu
                             </a>
                         </li>
