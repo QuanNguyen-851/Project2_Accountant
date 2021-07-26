@@ -11,22 +11,44 @@
                 <label id="chon" class="control-label">Hình thức đóng</label>
                 <select required id="check" name="method" class="selectpicker" data-title="Single Select" data-style="btn-default btn-block" data-menu-style="dropdown-blue">
                     @foreach($method as $method)
-                        <option {{($payment->idMethod == $method->id) ? 'selected="selected"' : ""  }} value="{{$method->countPer}}">{{$method->name}}</option>
+
+                        <option {{($payment->idMethod == $method->id) ? 'selected="selected"' : ""  }} {{($payment->idMethod > $method->id) ? 'disabled="true"' : ""  }} value="{{$method->countPer}}">{{$method->name}} - {{$method->sale}}%</option>
+                    @endforeach
+                </select>
+                @else
+                <select required id="check" name="method" class="selectpicker" data-title="Single Select" data-style="btn-default btn-block" data-menu-style="dropdown-blue">
+                    @foreach($method as $method)
+                        <option value="{{$method->countPer}}">{{$method->name}}  - {{$method->sale}}%</option>
+
                     @endforeach
                 </select>
                 @endif
             </div>
+
+            @if(isset($payment))
             <div class="form-group">
                 <label class="control-label">Note</label>
-                <textarea required name="note" class="form-control" placeholder="Chú thích" rows="5"></textarea>
+                <textarea required name="note" class="form-control" placeholder="Chú thích" rows="5">{{$payment->note}}</textarea>
             </div>
+            @else
+            <div class="form-group">
+                <label class="control-label">Note</label>
+                <textarea required name="note" class="form-control" placeholder="Chú thích" rows="5">{{$info->name}} Nộp tiền học phí đợt .. (tháng/năm) {{$info->fee}}/tháng {{$info->major}}:{{$info->nameclass}}{{$info->course}}</textarea>
+            </div>
+            @endif
             <div class="form-group">
                 <label class="control-label">Sồ tiền đóng</label>
                 <input class="form-control"
+                id="pay"
                 name="fee"
                 type="number"
                 required="true"
-                value="{{$info->fee}}"
+                @if(isset($payment))
+                value="{{$payment->fee}}"
+                @else
+                value=""
+                @endif
+
          />
             </div>
             <div class="form-group">

@@ -1,11 +1,9 @@
 @extends('layouts.layout')
 @section('main')
-<h1>Học phí sinh viên</h1>
+<h1>Phụ phí sinh viên</h1>
 <hr style='width:99%'>
 <div class="toolbar">
-
-    <a style="margin-right:100px" onclick="return confirm('Xác nhận ?')" href="{{route('count')}}" class="btn btn-success" type="button">Đợt mới</a>
-
+    <a style="margin-right:100px" onclick="return confirm('Xác nhận ?')" href="{{route('count')}}" class="btn btn-success" type="button">kỳ mới</a>
 </div>
 
 <table id="bootstrap-table" class="table">
@@ -36,7 +34,7 @@
             <td>{{date_format($date,"d/m/Y")}}</td>
             <td>{{$item->address}}</td>
             <td>{{$item->classname}}{{$item->course}}</td>
-            <td><a href="{{route('fee.show',$item->id)}}" type="button" class="btn btn-success">Đóng học</a></td>
+            <td><a href="{{route('subfee.show',$item->id)}}" type="button" class="btn btn-success">Đóng phụ phí</a></td>
         </tr>
         @endforeach
     </tbody>

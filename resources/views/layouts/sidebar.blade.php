@@ -35,65 +35,21 @@
         </div>
 
         <ul class="nav">
-            <li class="active">
+
+            <li>
+
                 <a href="{{route('fee.index')}}">
                     <i class="pe-7s-note2"></i>
                     <p>Học phí</p>
                 </a>
             </li>
             <li>
-                <a data-toggle="collapse" href="#componentsExamples">
+                <a href="{{route('subfee.index')}}">
                     <i class="pe-7s-plugin"></i>
-                    <p>Phụ phí
-                       <b class="caret"></b>
-                    </p>
+
+                    <p>Phụ phí</p>
+
                 </a>
-                <div class="collapse" id="componentsExamples">
-                    <ul class="nav">
-                        <li>
-                            <a href="buttons">
-                                <span class="sidebar-mini">B</span>
-                                <span class="sidebar-normal">Buttons</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="grid">
-                                <span class="sidebar-mini">GS</span>
-                                <span class="sidebar-normal">Grid System</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="components/panels.html">
-                                <span class="sidebar-mini">P</span>
-                                <span class="sidebar-normal">Panels</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="components/sweet-alert.html">
-                                <span class="sidebar-mini">SA</span>
-                                <span class="sidebar-normal">Sweet Alert</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="components/notifications.html">
-                                <span class="sidebar-mini">N</span>
-                                <span class="sidebar-normal">Notifications</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="components/icons.html">
-                                <span class="sidebar-mini">I</span>
-                                <span class="sidebar-normal">Icons</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="components/typography.html">
-                                <span class="sidebar-mini">T</span>
-                                <span class="sidebar-normal">Typography</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
             </li>
             <li>
                 <a data-toggle="collapse" href="#formsExamples">
