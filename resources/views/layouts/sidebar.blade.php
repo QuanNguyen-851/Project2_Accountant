@@ -50,7 +50,7 @@
             <li>
                 <a data-toggle="collapse" href="#formsExamples">
                     <i class="pe-7s-note2"></i>
-                    <p>Forms
+                    <p>Đóng bù
                        <b class="caret"></b>
                     </p>
                 </a>
