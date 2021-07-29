@@ -17,6 +17,7 @@ class LoginController extends Controller
             $password = $request->get('password');
             $result = MinistryModel::where('email', $email)
             ->where('passWord', $password)
+
             ->firstOrFail();
             $request->session()->put('id',$result->id);
             $request->session()->put('name',$result->name);
@@ -30,6 +31,7 @@ class LoginController extends Controller
         $request->session()->flush();
         return redirect(route('login'));
     }
+
     public function changepass(){
         return view('changepass');
     }
@@ -52,4 +54,5 @@ class LoginController extends Controller
         }
         return redirect(route('login'));
     }
+
 }

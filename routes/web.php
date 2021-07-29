@@ -3,8 +3,10 @@
 use App\Http\Controllers\ComponentsController;
 use App\Http\Controllers\FeeController;
 use App\Http\Controllers\LoginController;
+
 use App\Http\Controllers\subfee;
 use App\Http\Middleware\CheckBlock;
+
 use App\Http\Middleware\CheckLoged;
 use App\Http\Middleware\CheckLogin;
 use Illuminate\Support\Facades\Route;
@@ -22,6 +24,7 @@ use Illuminate\Support\Facades\Route;
 
 //check login
 Route::middleware([CheckLogin::class])->group(function(){
+
     //Check block
     Route::middleware([CheckBlock::class])->group(function(){
         //fee
@@ -37,6 +40,7 @@ Route::middleware([CheckLogin::class])->group(function(){
         Route::get('/changepass',[LoginController::class, 'changepass'])->name('changepass');
         Route::post('/changepassprocess',[LoginController::class,'changepasswordprocess'])->name('changepasswordprocess');
     });
+
 });
 //check loged
 Route::middleware([CheckLoged::class])->group(function(){

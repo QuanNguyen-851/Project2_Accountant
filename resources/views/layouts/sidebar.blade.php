@@ -35,7 +35,9 @@
         </div>
 
         <ul class="nav">
+
             <li>
+
                 <a href="{{route('fee.index')}}">
                     <i class="pe-7s-note2"></i>
                     <p>Học phí</p>
@@ -44,7 +46,9 @@
             <li>
                 <a href="{{route('subfee.index')}}">
                     <i class="pe-7s-plugin"></i>
+
                     <p>Phụ phí</p>
+
                 </a>
             </li>
             <li>

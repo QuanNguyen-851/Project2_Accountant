@@ -11,6 +11,7 @@
                 <label id="chon" class="control-label">Hình thức đóng</label>
                 <select required id="check" name="method" class="selectpicker" data-title="Single Select" data-style="btn-default btn-block" data-menu-style="dropdown-blue">
                     @foreach($method as $method)
+
                         <option {{($payment->idMethod == $method->id) ? 'selected="selected"' : ""  }} {{($payment->idMethod > $method->id) ? 'disabled="true"' : ""  }} value="{{$method->countPer}}">{{$method->name}} - {{$method->sale}}%</option>
                     @endforeach
                 </select>
@@ -18,10 +19,12 @@
                 <select required id="check" name="method" class="selectpicker" data-title="Single Select" data-style="btn-default btn-block" data-menu-style="dropdown-blue">
                     @foreach($method as $method)
                         <option value="{{$method->countPer}}">{{$method->name}}  - {{$method->sale}}%</option>
+
                     @endforeach
                 </select>
                 @endif
             </div>
+
             @if(isset($payment))
             <div class="form-group">
                 <label class="control-label">Note</label>
@@ -45,6 +48,7 @@
                 @else
                 value=""
                 @endif
+
          />
             </div>
             <div class="form-group">

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\CourseModel;
+
 use App\Models\FeeModel;
 use App\Models\PayMentModel;
 use App\Models\StudentModel;
@@ -89,8 +91,10 @@ class FeeController extends Controller
         $method = PayMentModel::Select('payment.*')->get();
         $info = StudentModel::join('classbk', 'classbk.id','=','student.idClass')
         ->join('course','classbk.idCourse','=','course.id')
+
         ->join('major','classbk.idMajor','=','major.id')
         ->Select('student.*','classbk.name as nameclass','course.name as course','major.name as major')
+
         ->where('student.id',$id)
         ->first();
         
@@ -141,6 +145,7 @@ class FeeController extends Controller
     {
         //
     }
+
     public function addcount(){
         $course = CourseModel::Select('course.*')
         ->where('countMustPay','<','30')
@@ -153,4 +158,5 @@ class FeeController extends Controller
         }
         return redirect(route('login'));
     }
+
 }
