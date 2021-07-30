@@ -69,22 +69,15 @@
                 value="{{$info->nameclass}}{{$info->course}}"
          />
             </div>
-        @if (isset($payment))
             <div class="form-group">
-                <label class="control-label">Số đợt đã đóng</label>
+                <label class="control-label">Số tháng đóng</label>
                 <input class="form-control"
+                id="count"
                 name="count"
                 type="number"
-                readonly
-                value="{{$payment->countPay}}"
+                value=""
             />
             </div>
-         @else
-         <div class="form-group">
-            <label class="control-label">Số đợt đóng </label>
-            <input id='ad' name='firstcount' class="form-control" type="number" value="0">
-        </div>
-         @endif
         <div class="footer text-center">
             <button type="submit" class="btn btn-info btn-fill btn-wd" >Đóng học</button>
         </div>
@@ -103,9 +96,10 @@
     }
 </script> --}}
 <script>
+    document.getElementById('count').value = document.getElementById('check').value;
     document.getElementById('check').onchange = function(){
         var x = document.getElementById('check').value;
-        document.getElementById('ad').value = x;
+        document.getElementById('count').value = x;
     }
 </script>
 @endsection

@@ -47,23 +47,24 @@ class FeeController extends Controller
      */
     public function store(Request $request)
     {
-        $getId = PayMentModel::select('*')->where('countPer',$request->method)->first();
-        $id = $getId->id;
-        if(isset($request->firstcount)){
-            
-            FeeModel::insert([
-                'idStudent' => $request->id,
-                'idMethod' => $id,
-                'note' => $request->note,
-                'fee' => $request->fee,
-                'accountant' => $request->session()->get('email'),
-                'payer' => $request->nameStudent,
-                'date' => date('Y-m-d'),
-                'class_bk' => $request->classStudent,
-                'countPay' => $request->firstcount,
-                'disable' => 0
-            ]);
+        $lastpay = FeeModel::select('fee.*')
+        ->where('fee.idStudent',$request->id)->max('id');
+        if (isset($lastpay)){
+        $payment = FeeModel::select('fee.*')
+        ->where('id',$lastpay)->first();
+        $lastcount = $payment->countPay;
+        $count = $lastcount + $request->count;
         } else {
+            $count = 0 + $request->count;
+        }
+        $student = StudentModel::select('*')
+        ->where('id',$request->id)
+        ->first();
+        $getId = PayMentModel::select('*')
+        ->where('countPer',$request->method)
+        ->first();
+        (($student->fee*$request->count-($student->fee*$request->count*$getId->sale/100)) == $request->fee) ? $disable = 1 : $disable = 0;
+        $id = $getId->id;
             FeeModel::insert([
                 'idStudent' => $request->id,
                 'idMethod' => $id,
@@ -73,37 +74,9 @@ class FeeController extends Controller
                 'payer' => $request->nameStudent,
                 'date' => date('Y-m-d'),
                 'class_bk' => $request->classStudent,
-                'countPay' => $request->count + $request->method,
-                'disable' => 0
+                'countPay' => $count,
+                'disable' => $disable
             ]);
-        }
-
-        // $maxpayment = FeeModel::select('fee.*')
-        // ->where('fee.idStudent',$request->id)->max('id');
-        // $payment = FeeModel::select('fee.*')
-        // ->where('id',$maxpayment)->first();
-        // $check = FeeModel::select('fee.*','payment.sale as sale','payment.countPer as countPer')
-        // ->join('payment','fee.idMethod','=','payment.id')
-        // -> where('idStudent',$request->id)->get();
-        // $student = StudentModel::select('student.fee')
-        // ->where('id',$request->id)->first();
-        // $fee = 0;
-        // foreach($check as $check){
-        //     $fee += $check->fee + ($student->fee*$check->countPer*($check->sale/100));
-        // }
-        // echo $fee;
-        // $totalfee = StudentModel::join('classbk', 'student.idClass','=','classbk.id')
-        // ->join('major','classbk.idMajor','=','major.id')
-        // ->join('scholarship','student.idStudentShip','=','scholarship.id')
-        // ->select('major.fee as fee','scholarship.scholarship as scholarship')
-        // ->where('student.id',$request->id)->first();
-        // $checkfee = ($totalfee->fee*30)-($totalfee->scholarship);
-        // if ($payment->countPay>=30 && $fee>=$checkfee){
-        //     StudentModel::where('id', $request->id)
-        //     ->update(['disable' => 1]);
-            // FeeModel::where('idStudent',$request->id)
-            // ->update(['disable' => 1]);
-        // }
 
         return redirect(route('login'));
     }
