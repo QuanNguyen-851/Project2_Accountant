@@ -19,13 +19,17 @@ class FeeController extends Controller
      */
     public function index()
     {
+        $class = CourseModel::select('*')
+        ->where('disable',0)
+        ->get();
         $allstudents = StudentModel::join('classbk', 'student.idClass', '=', 'classbk.id')
             ->join('scholarship', 'scholarship.id', '=', 'student.idStudentShip')
             ->join('course', 'course.id', '=', 'classbk.idCourse')
             ->select('student.*', 'classbk.name as classname', 'scholarship.name as scholarship', 'course.name as course', 'course.id as idcorse')
             ->where('student.disable', '!=', '1')->get();
         return View('fee.index',[
-            'list' => $allstudents
+            'list' => $allstudents,
+            'classbk'=>$class
         ]);
     }
 
@@ -70,7 +74,7 @@ class FeeController extends Controller
                 'idMethod' => $id,
                 'note' => $request->note,
                 'fee' => $request->fee,
-                'accountant' => $request->session()->get('email'),
+                'accountant' => $request->session()->get('name'),
                 'payer' => $request->nameStudent,
                 'date' => date('Y-m-d'),
                 'class_bk' => $request->classStudent,
@@ -158,6 +162,24 @@ class FeeController extends Controller
             ->update(['countMustPay' => $count+1]);
         }
         return redirect(route('login'));
+    }
+    public function student($id)
+    {
+        $class = CourseModel::select('*')
+        ->where('disable',0)
+        ->get();
+        $allstudents = StudentModel::join('classbk', 'student.idClass', '=', 'classbk.id')
+            ->join('scholarship', 'scholarship.id', '=', 'student.idStudentShip')
+            ->join('course', 'course.id', '=', 'classbk.idCourse')
+            ->select('student.*', 'classbk.name as classname', 'scholarship.name as scholarship', 'course.name as course', 'course.id as idcorse')
+            ->where('student.disable', '!=', '1')
+            ->where('course.id',$id)
+            ->get();
+        return View('fee.index',[
+            'list' => $allstudents,
+            'classbk'=>$class,
+            'id'=>$id
+        ]);
     }
 
 }

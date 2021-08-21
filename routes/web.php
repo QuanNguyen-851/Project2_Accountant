@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\buController;
 use App\Http\Controllers\ComponentsController;
 use App\Http\Controllers\FeeController;
 use App\Http\Controllers\LoginController;
@@ -29,6 +30,7 @@ Route::middleware([CheckLogin::class])->group(function(){
     Route::middleware([CheckBlock::class])->group(function(){
         //fee
         Route::resource('fee',FeeController::class);
+        Route::get('/student/{id}',[FeeController::class, 'student']);
         //logout
         Route::get('/logout',[LoginController::class, 'logout'])->name('logout');
         //add Count
@@ -38,6 +40,9 @@ Route::middleware([CheckLogin::class])->group(function(){
 
         //sub fee
         Route::resource('subfee',subfee::class);
+        Route::get('/sub/{id}',[subfee::class, 'student']);
+        //bu fee
+        Route::resource('compensation',buController::class);
         //change password
         Route::get('/changepass',[LoginController::class, 'changepass'])->name('changepass');
         Route::post('/changepassprocess',[LoginController::class,'changepasswordprocess'])->name('changepasswordprocess');
