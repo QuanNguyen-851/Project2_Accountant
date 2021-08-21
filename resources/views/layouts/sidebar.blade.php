@@ -55,7 +55,7 @@
                 <a href="{{route('compensation.index')}}">
                     <i class="pe-7s-note2"></i>
                     <p>Đóng bù
-                       
+
                     </p>
                 </a>
             </li>
