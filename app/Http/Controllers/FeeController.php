@@ -81,6 +81,7 @@ class FeeController extends Controller
                 'countPay' => $count,
                 'disable' => $disable
             ]);
+
         return redirect(route('login'));
     }
 

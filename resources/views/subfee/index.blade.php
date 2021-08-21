@@ -3,6 +3,7 @@
 <h1>Phụ phí sinh viên</h1>
 <hr style='width:99%'>
 <div class="toolbar">
+
     <a style="margin-right:100px" onclick="return confirm('Xác nhận ?')" href="{{route('subcount')}}" class="btn btn-success" type="button">kỳ mới</a>
 
     <select id="subchange" style="margin-right:100px;width:200px">

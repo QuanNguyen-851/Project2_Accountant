@@ -35,7 +35,9 @@ Route::middleware([CheckLogin::class])->group(function(){
         Route::get('/logout',[LoginController::class, 'logout'])->name('logout');
         //add Count
         Route::get('/count',[FeeController::class, 'addcount'])->name('count');
+
         Route::get('/subcount',[subfee::class, 'addcount'])->name('subcount');
+
         //sub fee
         Route::resource('subfee',subfee::class);
         Route::get('/sub/{id}',[subfee::class, 'student']);
