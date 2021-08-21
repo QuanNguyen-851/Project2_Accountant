@@ -101,7 +101,8 @@
 	<script src="../assets/js/light-bootstrap-dashboard.js?v=1.4.1"></script>
 
 	<!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
-	<script src="../assets/js/demo.js"></script>
+    <script src="../assets/js/demo.js"></script>
+    <script src="../assets/js/change.js"></script>
 
 	<script type="text/javascript">
     	$(document).ready(function(){
@@ -158,7 +159,7 @@
             $(window).resize(function () {
                 $table.bootstrapTable('resetView');
             });
-    
+           
             window.operateEvents = {
                 'click .view': function (e, value, row, index) {
                     info = JSON.stringify(row);
@@ -196,6 +197,6 @@
             ].join('');
         }
     
-    
+        
     </script>
 </html>

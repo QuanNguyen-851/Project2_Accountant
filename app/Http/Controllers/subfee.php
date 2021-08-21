@@ -16,13 +16,17 @@ class subfee extends Controller
      */
     public function index()
     {
+        $class = CourseModel::select('*')
+        ->where('disable',0)
+        ->get();
         $allstudents = StudentModel::join('classbk', 'student.idClass', '=', 'classbk.id')
             ->join('scholarship', 'scholarship.id', '=', 'student.idStudentShip')
             ->join('course', 'course.id', '=', 'classbk.idCourse')
             ->select('student.*', 'classbk.name as classname', 'scholarship.name as scholarship', 'course.name as course', 'course.id as idcorse')
             ->where('student.disable', '!=', '1')->get();
         return view('subfee.index',[
-            'list' => $allstudents
+            'list' => $allstudents,
+            'classbk' =>$class
         ]);
     }
 
@@ -128,5 +132,23 @@ class subfee extends Controller
             ->update(['countSubFeeMustPay' => $count+1]);
         }
         return redirect(route('login'));
+    }
+    public function student($id)
+    {
+        $class = CourseModel::select('*')
+        ->where('disable',0)
+        ->get();
+        $allstudents = StudentModel::join('classbk', 'student.idClass', '=', 'classbk.id')
+            ->join('scholarship', 'scholarship.id', '=', 'student.idStudentShip')
+            ->join('course', 'course.id', '=', 'classbk.idCourse')
+            ->select('student.*', 'classbk.name as classname', 'scholarship.name as scholarship', 'course.name as course', 'course.id as idcorse')
+            ->where('student.disable', '!=', '1')
+            ->where('course.id',$id)
+            ->get();
+        return view('subfee.index',[
+            'classbk'=>$class,
+            'id'=>$id,
+            'list' => $allstudents
+        ]);
     }
 }

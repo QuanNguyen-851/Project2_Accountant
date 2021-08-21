@@ -4,6 +4,13 @@
 <hr style='width:99%'>
 <div class="toolbar">
     <a style="margin-right:100px" onclick="return confirm('Xác nhận ?')" href="{{route('subcount')}}" class="btn btn-success" type="button">kỳ mới</a>
+
+    <select id="subchange" style="margin-right:100px;width:200px">
+        <option value="0">All</option>
+        @foreach($classbk as $items)
+        <option {{(isset($id) && $id == $items->id)? "selected" : ""}} value="{{$items->id}}">{{$items->name}}</option>
+        @endforeach
+    </select>
 </div>
 
 <table id="bootstrap-table" class="table">

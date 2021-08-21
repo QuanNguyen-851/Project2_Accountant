@@ -52,40 +52,12 @@
                 </a>
             </li>
             <li>
-                <a data-toggle="collapse" href="#formsExamples">
+                <a href="{{route('compensation.index')}}">
                     <i class="pe-7s-note2"></i>
                     <p>Đóng bù
-                       <b class="caret"></b>
+                       
                     </p>
                 </a>
-                <div class="collapse" id="formsExamples">
-                    <ul class="nav">
-                        <li>
-                            <a href="forms/regular.html">
-                                <span class="sidebar-mini">Rf</span>
-                                <span class="sidebar-normal">Regular Forms</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="forms/extended.html">
-                                <span class="sidebar-mini">Ef</span>
-                                <span class="sidebar-normal">Extended Forms</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="forms/validation.html">
-                                <span class="sidebar-mini">Vf</span>
-                                <span class="sidebar-normal">Validation Forms</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="forms/wizard.html">
-                                <span class="sidebar-mini">W</span>
-                                <span class="sidebar-normal">Wizard</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
             </li>
             <li>
                 <a data-toggle="collapse" href="#tablesExamples">

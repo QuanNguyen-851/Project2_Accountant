@@ -3,7 +3,11 @@
 <div class="card">
     <form id="loginFormValidation" action="{{route('fee.store')}}" method="post">
         @csrf
-        <div class="header text-center">Đóng Học Phí</div>
+        @if(isset($payment))
+        <div class="header text-center">{{$info->name}} Đóng Học Phí lần {{$payment->countPay+1}}</div>
+        @else
+        <div class="header text-center">{{$info->name}} Đóng Học Phí lần đầu</div>
+        @endif
         <div class="content">
             <input type="hidden" name="id" value="{{$info->id}}">
             <div class="form-group">
