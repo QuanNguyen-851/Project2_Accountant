@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use PhpOffice\PhpWord\TemplateProcessor;
 
 use App\Models\CourseModel;
 
@@ -67,7 +68,7 @@ class FeeController extends Controller
         $getId = PayMentModel::select('*')
         ->where('countPer',$request->method)
         ->first();
-        (($student->fee*$request->count-($student->fee*$request->count*$getId->sale/100)) == $request->fee) ? $disable = 1 : $disable = 0;
+        (($student->fee*$request->count-($student->fee*$request->count*$getId->sale/100)) <= $request->fee) ? $disable = 1 : $disable = 0;
         $id = $getId->id;
             FeeModel::insert([
                 'idStudent' => $request->id,
@@ -81,8 +82,12 @@ class FeeController extends Controller
                 'countPay' => $count,
                 'disable' => $disable
             ]);
-
-        return redirect(route('login'));
+        $maxid = FeeModel::select('fee.id')
+        ->where('idStudent',$request->id)
+        ->max('id');
+        return view('fee.success',[
+            'id'=>$maxid
+        ]);
     }
 
     /**
@@ -181,5 +186,30 @@ class FeeController extends Controller
             'id'=>$id
         ]);
     }
+    public function exportwordfee($id)
+    	{
+        $fee = FeeModel::where('fee.id', $id)
+            ->join('student', 'fee.idStudent', '=', 'student.id')
+            ->join('classbk', 'student.idClass', '=', 'classbk.id')
+            ->select('fee.*', 'student.name', 'student.dateBirth', 'student.address')
+            ->first();    //câu query tùy theo trường hợp ô muốn dùng mà thay đổi nhé
+
+        $templateProcessor = new TemplateProcessor('word-templade/fee.docx');    // cái này k cần quan tâm nhưng bắt buộc phải có
+				     //(key  , value)					
+        $templateProcessor->setValue('id', $fee->id);    // những thứ trong dấu '' không nên sửa vì file đầu ra sẽ dựa vào key
+        $templateProcessor->setValue('day', date_format(date_create($fee->date), "d"));
+        $templateProcessor->setValue('month', date_format(date_create($fee->date), "m"));
+        $templateProcessor->setValue('year', date_format(date_create($fee->date), "Y"));
+        $templateProcessor->setValue('payer', $fee->payer);
+        $templateProcessor->setValue('dateBirth', date_format(date_create($fee->dateBirth), "d.m.Y"));
+        $templateProcessor->setValue('address', $fee->address);
+        $templateProcessor->setValue('note', $fee->note);
+        $templateProcessor->setValue('fee', number_format($fee->fee));
+
+        $fileName = "phiếu thu " . $fee->name;    //// đặt tên file
+        $templateProcessor->saveAs($fileName . '.docx');      //// cái này k cần quan tâm nhưng bắt buộc phải có
+        return response()->download($fileName . '.docx')->deleteFileAfterSend(true);    //// xuất ra file
+        
+    	}
 
 }

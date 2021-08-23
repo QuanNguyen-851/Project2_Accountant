@@ -5,7 +5,7 @@
 	<link rel="icon" type="image/png" href="../assets/img/favicon.ico">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>Light Bootstrap Dashboard PRO by Creative Tim</title>
+	<title>Đóng học BKACAD</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -106,19 +106,22 @@
 
 	<script type="text/javascript">
     	$(document).ready(function(){
+            var today = new Date();
+            var date = today.getDate();
+            if(date == 1){
 
         	demo.initDashboardPageCharts();
         	demo.initVectorMap();
 
         	$.notify({
             	icon: 'pe-7s-bell',
-            	message: "<b>Light Bootstrap Dashboard PRO</b> - forget about boring dashboards."
+            	message: "<b>Đã sang tháng mới</b> - Ấn nút đợt mới để đóng học phí tháng này - <b> Bỏ qua nếu đã ấn </b> "
 
             },{
                 type: 'warning',
                 timer: 4000
             });
-
+        }
     	});
     </script>
     <script type="text/javascript">

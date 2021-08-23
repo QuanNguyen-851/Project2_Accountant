@@ -61,7 +61,7 @@
             >
         </div>
         <div class="footer text-center">
-            <button type="submit" class="btn btn-info btn-fill btn-wd" >Đóng học</button>
+            <button type="submit" class="btn btn-info btn-fill btn-wd" >Đóng</button>
         </div>
     </form>
 </div>
