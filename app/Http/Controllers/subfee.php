@@ -147,6 +147,7 @@ class subfee extends Controller
         }
         return redirect(route('login'));
     }
+
     public function student($id)
     {
         $class = CourseModel::select('*')
