@@ -4,8 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\CourseModel;
 use App\Models\FeeModel;
+
+use App\Models\PayMentModel;
 use App\Models\StudentModel;
 use Illuminate\Http\Request;
+use PhpOffice\PhpWord\TemplateProcessor;
+
 
 class buController extends Controller
 {
@@ -61,7 +65,23 @@ class buController extends Controller
      */
     public function show($id)
     {
-        //
+
+        $method = PayMentModel::Select('payment.*')->get();
+        $info = FeeModel::join('student', 'idStudent','=','student.id')
+        ->join('payment','fee.idMethod','=','payment.id')
+        ->select('fee.*','payment.*','fee.id as idfee')
+        ->where('fee.id',$id)
+        ->first();
+        $student = StudentModel::select('*')
+        ->where('id',$info->idStudent)
+        ->first();
+        $left = ($student->fee*$info->countPer-($student->fee*$info->countPer*$info->sale/100))-$info->fee;
+        return view('bufee.view',[
+            'info' => $info,
+            'method'=>$method,
+            'left'=>$left
+        ]); 
+
     }
 
     /**
@@ -84,7 +104,16 @@ class buController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        (($request->payed+$request->paymore) >= $request->thieu) ? $disable = 1 : $disable = 0;
+        FeeModel::where('id',$id)
+            ->update([
+                'fee' => $request->payed+$request->paymore,
+                'date' =>date('Y-m-d'),
+                'disable'=> $disable
+            ]);
+            return redirect(route('compensation.index'));
+
     }
 
     /**
@@ -97,4 +126,5 @@ class buController extends Controller
     {
         //
     }
+
 }
