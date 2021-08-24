@@ -186,6 +186,7 @@ class FeeController extends Controller
             'id'=>$id
         ]);
     }
+
     public function exportwordfee($id)
     	{
         $fee = FeeModel::where('fee.id', $id)
@@ -211,5 +212,6 @@ class FeeController extends Controller
         return response()->download($fileName . '.docx')->deleteFileAfterSend(true);    //// xuất ra file
         
     	}
+
 
 }

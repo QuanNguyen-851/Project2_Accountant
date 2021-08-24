@@ -31,7 +31,9 @@ Route::middleware([CheckLogin::class])->group(function(){
         //fee
         Route::resource('fee',FeeController::class);
         Route::get('/student/{id}',[FeeController::class, 'student']);
+
         Route::get('/exportwordfee/{id}',[FeeController::class, 'exportwordfee'])->name('exportwordfee');
+
         //logout
         Route::get('/logout',[LoginController::class, 'logout'])->name('logout');
         //add Count
@@ -42,7 +44,9 @@ Route::middleware([CheckLogin::class])->group(function(){
         //sub fee
         Route::resource('subfee',subfee::class);
         Route::get('/sub/{id}',[subfee::class, 'student']);
+
         Route::get('/exportwordsubfee/{id}',[subfee::class, 'exportwordsubfee'])->name('exportwordsubfee');
+
         //bu fee
         Route::resource('compensation',buController::class);
         //change password
