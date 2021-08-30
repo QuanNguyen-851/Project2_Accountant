@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\CourseModel;
 use App\Models\FeeModel;
+
 use App\Models\PayMentModel;
 use App\Models\StudentModel;
 use Illuminate\Http\Request;
 use PhpOffice\PhpWord\TemplateProcessor;
+
 
 class buController extends Controller
 {
@@ -63,6 +65,7 @@ class buController extends Controller
      */
     public function show($id)
     {
+
         $method = PayMentModel::Select('payment.*')->get();
         $info = FeeModel::join('student', 'idStudent','=','student.id')
         ->join('payment','fee.idMethod','=','payment.id')
@@ -78,6 +81,7 @@ class buController extends Controller
             'method'=>$method,
             'left'=>$left
         ]); 
+
     }
 
     /**
