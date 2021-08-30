@@ -100,14 +100,18 @@ class buController extends Controller
      */
     public function update(Request $request, $id)
     {
-        (($request->payed+$request->paymore) >= $request->thieu) ? $disable = 1 : $disable = 0;
+        (($request->paid+$request->paymore) >= $request->thieu) ? $disable = 1 : $disable = 0;
         FeeModel::where('id',$id)
             ->update([
-                'fee' => $request->payed+$request->paymore,
+                'note' => $request->note,
+                'fee' => $request->paid+$request->paymore,
                 'date' =>date('Y-m-d'),
                 'disable'=> $disable
             ]);
-            return redirect(route('compensation.index'));
+        return view('bufee.success',[
+            'id' => $id,
+            'paymore'=>$request->paymore,
+        ]);
     }
 
     /**
@@ -121,5 +125,27 @@ class buController extends Controller
         //
     }
 
-    
+    public function exportwordcompensation($id)
+    {
+        $fee = FeeModel::where('fee.id', $id)
+            ->join('student', 'fee.idStudent', '=', 'student.id')
+            ->join('classbk', 'student.idClass', '=', 'classbk.id')
+            ->select('fee.*', 'student.name', 'student.dateBirth', 'student.address')
+            ->first();
+            $templateProcessor = new TemplateProcessor('word-templade/fee.docx');    // cái này k cần quan tâm nhưng bắt buộc phải có
+            //(key  , value)					
+            $templateProcessor->setValue('id', $fee->id);    // những thứ trong dấu '' không nên sửa vì file đầu ra sẽ dựa vào key
+            $templateProcessor->setValue('day', date_format(date_create($fee->date), "d"));
+            $templateProcessor->setValue('month', date_format(date_create($fee->date), "m"));
+            $templateProcessor->setValue('year', date_format(date_create($fee->date), "Y"));
+            $templateProcessor->setValue('payer', $fee->payer);
+            $templateProcessor->setValue('dateBirth', date_format(date_create($fee->dateBirth), "d.m.Y"));
+            $templateProcessor->setValue('address', $fee->address);
+            $templateProcessor->setValue('note', $fee->note);
+            $templateProcessor->setValue('fee', number_format($_GET['pay']));
+
+            $fileName = "phiếu thu " . $fee->name;    //// đặt tên file
+            $templateProcessor->saveAs($fileName . '.docx');      //// cái này k cần quan tâm nhưng bắt buộc phải có
+            return response()->download($fileName . '.docx')->deleteFileAfterSend(true);
+    }
 }

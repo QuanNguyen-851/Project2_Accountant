@@ -4,7 +4,10 @@
     <form id="loginFormValidation" action="{{route('subfee.store')}}" method="post">
         @csrf
         @if (isset($payment))
-        <div class="header text-center">{{$info->name}} Đóng Phụ Phí kỳ {{$payment->countPay+1}}</div>
+        @php
+            $paid = $payment->countPay+1
+        @endphp
+        <div class="header text-center">{{$info->name}} Đóng Phụ Phí {{($payment->countPay<6)? "kỳ $payment->$paid":""}}</div>
         @else
         <div class="header text-center">{{$info->name}} Đóng Phụ Phí Kỳ 1</div>
         @endif
@@ -29,6 +32,8 @@
                 type="number"
                 required="true"
                 value="1000000"
+                min="1"
+                max="6000000"
          />
             </div>
             <div class="form-group">
@@ -36,7 +41,7 @@
                 <input class="form-control"
                 name="nameStudent"
                 type="text"
-                readonly="true"
+                
                 value="{{$info->name}}"
          />
             </div>
@@ -61,8 +66,13 @@
             >
         </div>
         <div class="footer text-center">
-            <button type="submit" class="btn btn-info btn-fill btn-wd" >Đóng</button>
+            <button type="submit" class="btn btn-info btn-fill btn-wd" {{(isset($payment) && $payment->countPay>=6)? 'disabled':''}} >Đóng</button>
         </div>
+        @if (isset($payment) && $payment->countPay >= 6)
+                                        <center><div class="form-group">
+                                            <label style="color:red">Đã đóng đủ phụ phí của 3 năm</label>
+                                        </div><center>
+        @endif
     </form>
 </div>
 @endsection

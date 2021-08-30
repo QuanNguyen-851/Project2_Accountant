@@ -4,7 +4,7 @@
     <form id="loginFormValidation" action="{{route('fee.store')}}" method="post">
         @csrf
         @if(isset($payment))
-        <div class="header text-center">{{$info->name}} Đóng Học Phí lần {{$payment->countPay+1}}</div>
+        <div class="header text-center">{{$info->name}} Đóng Học Phí {{($payment->countPay<30)? 'lần $payment->countPay+1':''}}</div>
         @else
         <div class="header text-center">{{$info->name}} Đóng Học Phí lần đầu</div>
         @endif
@@ -16,7 +16,7 @@
                 <select required id="check" name="method" class="selectpicker" data-title="Single Select" data-style="btn-default btn-block" data-menu-style="dropdown-blue">
                     @foreach($method as $method)
 
-                        <option {{($payment->idMethod == $method->id) ? 'selected="selected"' : ""  }} {{($payment->idMethod > $method->id) ? 'disabled="true"' : ""  }} value="{{$method->countPer}}">{{$method->name}} - {{$method->sale}}%</option>
+                        <option {{($payment->idMethod == $method->id) ? 'selected="selected"' : ""  }} value="{{$method->countPer}}">{{$method->name}} - {{$method->sale}}%</option>
                     @endforeach
                 </select>
                 @else
@@ -47,6 +47,8 @@
                 name="fee"
                 type="number"
                 required="true"
+                min="1"
+                max="150000000"
                 @if(isset($payment))
                 value="{{$payment->fee}}"
                 @else
@@ -60,7 +62,6 @@
                 <input class="form-control"
                 name="nameStudent"
                 type="text"
-                readonly="true"
                 value="{{$info->name}}"
          />
             </div>
@@ -80,11 +81,18 @@
                 name="count"
                 type="number"
                 value=""
+                min="1"
+                max="30"
             />
             </div>
         <div class="footer text-center">
-            <button type="submit" class="btn btn-info btn-fill btn-wd" >Đóng học</button>
+            <button type="submit" class="btn btn-info btn-fill btn-wd" {{(isset($payment) && $payment->countPay >= 30)? 'disabled' : ''}} >Đóng học</button>
         </div>
+        @if (isset($payment) && $payment->countPay >= 30)
+                                        <center><div class="form-group">
+                                            <label style="color:red">Đã đóng đủ 30 đợt</label>
+                                        </div><center>
+        @endif
     </form>
 </div>
 {{-- <script>
