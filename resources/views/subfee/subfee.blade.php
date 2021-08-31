@@ -66,7 +66,9 @@
             >
         </div>
         <div class="footer text-center">
+
             <button type="submit" class="btn btn-info btn-fill btn-wd" {{(isset($payment) && $payment->countPay>=6)? 'disabled':''}} >Đóng</button>
+
         </div>
         @if (isset($payment) && $payment->countPay >= 6)
                                         <center><div class="form-group">
