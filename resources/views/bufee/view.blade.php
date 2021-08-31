@@ -23,11 +23,13 @@
                        type="text"
                        required="true"
                        value="{{$info->payer}}"
-                       
+       
+
                 />
             </div>
 
             <div class="form-group">
+
                 <label class="control-label">Note</label>
                 <textarea required name="note" class="form-control" placeholder="Chú thích" rows="5">{{$info->note}}</textarea>
             </div>
@@ -36,6 +38,7 @@
                 <label class="control-label">Số tiền đã đóng (VND)</label>
                 <input class="form-control"
                        name="paid"
+
                        type="number"
                        required="true"
                        value="{{$info->fee}}"
@@ -59,8 +62,10 @@
                        name="paymore"
                        type="number"
                        required="true"
+
                        min="1"
                        max="150000000"
+
                        value="{{$left}}"
                 />
             </div>

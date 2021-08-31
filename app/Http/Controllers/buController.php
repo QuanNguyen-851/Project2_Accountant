@@ -104,6 +104,7 @@ class buController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         (($request->paid+$request->paymore) >= $request->thieu) ? $disable = 1 : $disable = 0;
         FeeModel::where('id',$id)
             ->update([
@@ -116,6 +117,7 @@ class buController extends Controller
             'id' => $id,
             'paymore'=>$request->paymore,
         ]);
+
     }
 
     /**
@@ -128,6 +130,7 @@ class buController extends Controller
     {
         //
     }
+
 
     public function exportwordcompensation($id)
     {
@@ -152,4 +155,5 @@ class buController extends Controller
             $templateProcessor->saveAs($fileName . '.docx');      //// cái này k cần quan tâm nhưng bắt buộc phải có
             return response()->download($fileName . '.docx')->deleteFileAfterSend(true);
     }
+
 }
