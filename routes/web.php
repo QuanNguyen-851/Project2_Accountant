@@ -49,6 +49,7 @@ Route::middleware([CheckLogin::class])->group(function(){
 
         //bu fee
         Route::resource('compensation',buController::class);
+        Route::get('/exportwordcompensation/{id}',[buController::class, 'exportwordcompensation'])->name('exportwordcompensation');
         //change password
         Route::get('/changepass',[LoginController::class, 'changepass'])->name('changepass');
         Route::post('/changepassprocess',[LoginController::class,'changepasswordprocess'])->name('changepasswordprocess');
