@@ -4,7 +4,10 @@
     <form id="loginFormValidation" action="{{route('fee.store')}}" method="post">
         @csrf
         @if(isset($payment))
-        <div class="header text-center">{{$info->name}} Đóng Học Phí {{($payment->countPay<30)? 'lần $payment->countPay+1':''}}</div>
+        @php
+            $paid = $payment->countPay+1
+        @endphp
+        <div class="header text-center">{{$info->name}} Đóng Học Phí {{($payment->countPay<30)? "lần $paid":''}}</div>
         @else
         <div class="header text-center">{{$info->name}} Đóng Học Phí lần đầu</div>
         @endif

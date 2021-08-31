@@ -7,7 +7,7 @@
         @php
             $paid = $payment->countPay+1
         @endphp
-        <div class="header text-center">{{$info->name}} Đóng Phụ Phí {{($payment->countPay<6)? "kỳ $payment->$paid":""}}</div>
+        <div class="header text-center">{{$info->name}} Đóng Phụ Phí {{($payment->countPay<6)? "kỳ $paid":""}}</div>
         @else
         <div class="header text-center">{{$info->name}} Đóng Phụ Phí Kỳ 1</div>
         @endif
@@ -25,7 +25,7 @@
             </div>
             @endif
             <div class="form-group">
-                <label class="control-label">Sồ tiền đóng</label>
+                <label class="control-label">Sồ tiền đóng (VND)</label>
                 <input class="form-control"
                 id="pay"
                 name="fee"
@@ -34,6 +34,7 @@
                 value="1000000"
                 min="1"
                 max="6000000"
+                readonly
          />
             </div>
             <div class="form-group">
