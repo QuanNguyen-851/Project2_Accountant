@@ -7,7 +7,9 @@
         @php
             $paid = $payment->countPay+1
         @endphp
+
         <div class="header text-center">{{$info->name}} Đóng Phụ Phí {{($payment->countPay<6)? "kỳ $paid":""}}</div>
+
         @else
         <div class="header text-center">{{$info->name}} Đóng Phụ Phí Kỳ 1</div>
         @endif
@@ -34,7 +36,9 @@
                 value="1000000"
                 min="1"
                 max="6000000"
+
                 readonly
+
          />
             </div>
             <div class="form-group">
